@@ -8,4 +8,4 @@ export type Product = {
   countInStock: number;
   rating: number;
   numReviews: number;
-}
+};

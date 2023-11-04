@@ -1,4 +1,4 @@
-import { Product } from "../models/Product"
+import { Product } from '../models/Product';
 
 const products: Product[] = [
   {
@@ -7,7 +7,7 @@ const products: Product[] = [
     image: '',
     description: 'Wild West and Cowboys 🤠',
     category: 'RPG',
-    price: 70.00,
+    price: 70.0,
     countInStock: 111,
     rating: 5.0,
     numReviews: 16,
@@ -18,7 +18,7 @@ const products: Product[] = [
     image: '',
     description: 'Comicbooklike Comedy',
     category: 'RPG',
-    price: 45.00,
+    price: 45.0,
     countInStock: 12,
     rating: 4.5,
     numReviews: 94,
@@ -29,7 +29,7 @@ const products: Product[] = [
     image: '',
     description: "For D'n'D Fans 🎲",
     category: 'CRPG',
-    price: 62.00,
+    price: 62.0,
     countInStock: 765,
     rating: 5.0,
     numReviews: 78,
@@ -40,7 +40,7 @@ const products: Product[] = [
     image: '',
     description: 'City Builder',
     category: 'Simulator',
-    price: 68.00,
+    price: 68.0,
     countInStock: 876,
     rating: 4.0,
     numReviews: 54,
@@ -51,7 +51,7 @@ const products: Product[] = [
     image: '',
     description: 'Fantasy FPS',
     category: 'FPS',
-    price: 1.00,
+    price: 1.0,
     countInStock: 999,
     rating: 3.5,
     numReviews: 2344,
@@ -62,11 +62,11 @@ const products: Product[] = [
     image: '',
     description: 'Disco Detective',
     category: 'RPG',
-    price: 20.00,
+    price: 20.0,
     countInStock: 423,
     rating: 5.0,
     numReviews: 332,
   },
-]
+];
 
 export default products;
