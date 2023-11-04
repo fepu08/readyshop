@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "composite": true,
+    "strict": true,
+    "jsx": "react",
+    "esModuleInterop": true
+  },
+  "include": ["vite.config.ts"],
+  "exclude": ["node_modules"]
+}
