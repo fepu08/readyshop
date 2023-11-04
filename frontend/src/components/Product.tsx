@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 import { Product as ProductItem } from '../models/Product';
+import { Link } from 'react-router-dom';
 
 type ProductProps = {
   product: ProductItem;
@@ -8,8 +9,8 @@ type ProductProps = {
 
 const Product = ({ product }: ProductProps) => {
   return (
-    <Card className='my-3 p-3 rounded'>
-      <a href={`/product/${product._id}`}>
+    <Card className='p-3 rounded h-100'>
+      <Link to={`/product/${product._id}`}>
         <Card.Img
           src={
             product.image ||
@@ -17,15 +18,15 @@ const Product = ({ product }: ProductProps) => {
           }
           variant='top'
         />
-      </a>
+      </Link>
 
       <Card.Body>
-        <a href={`/product/${product._id}`}>
+        <Link to={`/product/${product._id}`}>
           <Card.Title as='div'>
             <strong>{product.name}</strong>
           </Card.Title>
           <Card.Text as='h3'>${product.price}</Card.Text>
-        </a>
+        </Link>
       </Card.Body>
     </Card>
   );
