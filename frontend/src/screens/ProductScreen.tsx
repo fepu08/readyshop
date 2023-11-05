@@ -2,11 +2,24 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
 import Rating from '../components/Rating';
-import products from '../mocks/products';
+import { ProductType } from '../models/Product';
+import { useEffect, useState } from 'react';
+import axios, { AxiosResponse } from 'axios';
 
 const ProductScreen = () => {
   const { id: productId } = useParams();
-  const product = products.find((p) => p._id === productId);
+  const [product, setProduct] = useState<ProductType>();
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const { data } = (await axios.get(
+        `http://localhost:5000/api/products/${productId}`,
+      )) as AxiosResponse<ProductType>;
+      setProduct(data);
+    };
+
+    fetchProduct();
+  }, [productId]);
 
   if (!product) {
     return <h1>Oh no! There is no product with id: {productId}</h1>;

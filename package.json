@@ -1,0 +1,56 @@
+{
+  "name": "readyshop",
+  "version": "1.0.0",
+  "description": "eCommere app built with MERN stack",
+  "main": "index.js",
+  "scripts": {
+    "server": "node dist/index.js",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run dev:server\" \"npm run client\"",
+    "dev:server": "nodemon",
+    "build": "etsc",
+    "watch": "etsc --w",
+    "test": "jest --coverage",
+    "lint": "etsc --noEmit && eslint \"**/*.ts\" --fix",
+    "lint:check": "eslint \"**/**/*.ts\"",
+    "format:check": "prettier --check */**/*.*",
+    "prepare": "husky install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.15",
+    "@types/express": "^4.17.20",
+    "@types/jest": "^29.5.5",
+    "@types/node": "^20.7.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "@typescript-eslint/parser": "^6.7.3",
+    "concurrently": "^8.2.2",
+    "dotenv": "^16.3.1",
+    "esbuild": "0.19.3",
+    "esbuild-node-tsc": "^2.0.5",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-jest": "^27.4.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.3",
+    "ts-jest": "^29.1.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "useTabs": false,
+    "printWidth": 120,
+    "trailingComma": "all"
+  }
+}
