@@ -1,6 +1,5 @@
 import mongoose, { Model } from 'mongoose';
-import reviewSchema from './reviewSchema';
-import User from './userSchema';
+import { reviewSchema } from './reviewSchema';
 import { ProductDocument } from '../models/ProductDocument';
 
 interface ProductModel extends Model<ProductDocument> {}
@@ -8,7 +7,7 @@ const productSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: User,
+      ref: 'User'
     },
     name: {
       type: String,
@@ -39,7 +38,7 @@ const productSchema = new mongoose.Schema(
       required: true,
       default: 0,
     },
-    reviews: [reviewSchema],
+    review: [reviewSchema],
     numReviews: {
       type: Number,
       required: true,

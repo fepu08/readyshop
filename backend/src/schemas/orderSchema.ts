@@ -1,8 +1,6 @@
 import mongoose, { Model } from 'mongoose';
-import reviewSchema from './reviewSchema';
-import User from './userSchema';
-import { ProductDocument } from '../models/ProductDocument';
 import { OrderDocument } from '../models/OrderDocument';
+import Product from "./productSchema";
 
 interface OrderModel extends Model<OrderDocument> {}
 const orderSchema = new mongoose.Schema(
@@ -10,7 +8,7 @@ const orderSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: User,
+      ref: 'User',
     },
     orderItems: [
       {
@@ -21,7 +19,7 @@ const orderSchema = new mongoose.Schema(
         product: {
           type: mongoose.Schema.Types.ObjectId,
           required: true,
-          ref: 'Product',
+          ref: Product,
         },
       },
     ],
@@ -36,9 +34,7 @@ const orderSchema = new mongoose.Schema(
       id: { type: String },
       status: { type: String },
       update_time: { type: String },
-      email_address: {
-        type: String,
-      },
+      email_address: {type: String},
     },
     itemsPrice: {
       type: Number,
@@ -79,6 +75,6 @@ const orderSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-const Order = mongoose.model<OrderDocument, OrderModel>('Product', orderSchema);
+const Order = mongoose.model<OrderDocument, OrderModel>('Order', orderSchema);
 
 export default Order;

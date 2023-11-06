@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import { ProductDocument } from './ProductDocument';
 import ShippingAddressDocument from './ShippingAddressDocument';
 
 export interface OrderDocument extends Document {
@@ -10,15 +9,20 @@ export interface OrderDocument extends Document {
       qty: number;
       image: string;
       price: number;
-      product: ProductDocument;
+      product: mongoose.Types.ObjectId;
     },
   ];
   shippingAddress: ShippingAddressDocument;
   paymentMethod: string;
-  paymentResult: string;
+  paymentResult: {
+    id: string;
+    status: string;
+    update_time: string;
+    email_address: string;
+  };
   itemsPrice: number;
-  taxPrice: number;
   shippingPrice: number;
+  taxPrice: number;
   totalPrice: number;
   isPaid: boolean;
   paidAt?: Date;

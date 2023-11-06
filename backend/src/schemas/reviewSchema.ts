@@ -1,5 +1,4 @@
 import mongoose, { Model } from 'mongoose';
-import User from './userSchema';
 import { ReviewDocument } from '../models/ReviewDocument';
 
 interface ReviewModel extends Model<ReviewDocument> {}
@@ -7,7 +6,7 @@ export const reviewSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: User,
+      ref: 'User',
     },
     name: {
       type: String,
@@ -25,6 +24,6 @@ export const reviewSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-const Review = mongoose.model<ReviewDocument, ReviewModel>('ReviewDocument', reviewSchema);
+const Review = mongoose.model<ReviewDocument, ReviewModel>('Review', reviewSchema);
 
 export default Review;
