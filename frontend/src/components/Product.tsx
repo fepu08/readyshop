@@ -1,10 +1,10 @@
 import { Card } from 'react-bootstrap';
-import { Product as ProductItem } from '../models/Product';
+import { ProductType } from '../models/Product';
 import { Link } from 'react-router-dom';
 import Rating from './Rating';
 
 type ProductProps = {
-  product: ProductItem;
+  product: ProductType;
 };
 
 const Product = ({ product }: ProductProps) => {
