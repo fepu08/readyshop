@@ -1,10 +1,9 @@
 import { Product } from '../models/Product';
 
-const products: Product[] = [
+const products: Omit<Product, '_id'>[] = [
   {
-    _id: '1',
     name: 'Read Dead Redemption 2',
-    image: '',
+    image: 'https://source.unsplash.com/random',
     description: 'Wild West and Cowboys 🤠',
     category: 'RPG',
     price: 70.0,
@@ -13,9 +12,8 @@ const products: Product[] = [
     numReviews: 16,
   },
   {
-    _id: '2',
     name: 'Borderlands 3',
-    image: '',
+    image: 'https://source.unsplash.com/random',
     description: 'Comicbooklike Comedy',
     category: 'RPG',
     price: 45.0,
@@ -24,9 +22,8 @@ const products: Product[] = [
     numReviews: 94,
   },
   {
-    _id: '3',
     name: "Baldur's Gate 3",
-    image: '',
+    image: 'https://source.unsplash.com/random',
     description: "For D'n'D Fans 🎲",
     category: 'CRPG',
     price: 62.0,
@@ -35,9 +32,8 @@ const products: Product[] = [
     numReviews: 78,
   },
   {
-    _id: '4',
     name: 'Cities Skylines 2',
-    image: '',
+    image: 'https://source.unsplash.com/random',
     description: 'City Builder',
     category: 'Simulator',
     price: 68.0,
@@ -46,9 +42,8 @@ const products: Product[] = [
     numReviews: 54,
   },
   {
-    _id: '5',
     name: 'Valorant',
-    image: '',
+    image: 'https://source.unsplash.com/random',
     description: 'Fantasy FPS',
     category: 'FPS',
     price: 1.0,
@@ -57,9 +52,8 @@ const products: Product[] = [
     numReviews: 2344,
   },
   {
-    _id: '6',
     name: 'Disco Elysium',
-    image: '',
+    image: 'https://source.unsplash.com/random',
     description: 'Disco Detective',
     category: 'RPG',
     price: 20.0,
