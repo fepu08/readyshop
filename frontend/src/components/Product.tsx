@@ -12,7 +12,7 @@ const Product = ({ product }: ProductProps) => {
     <Card className="p-3 rounded h-100">
       <Link to={`/product/${product._id}`}>
         <Card.Img
-          src={product.image || `https://source.unsplash.com/random/450x450?sig=${product._id}`}
+          src={product.image.includes('unsplash') ? product.image + `/900x900?sig=${product._id}` : product.image}
           variant="top"
         />
       </Link>

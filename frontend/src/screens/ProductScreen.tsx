@@ -33,7 +33,7 @@ const ProductScreen = () => {
         <Row>
           <Col md={6}>
             <Image
-              src={product.image || `https://source.unsplash.com/random/450x450?sig=${product._id}`}
+              src={product.image.includes('unsplash') ? product.image + `/900x900?sig=${product._id}` : product.image}
               alt={product.name}
               fluid
             />
