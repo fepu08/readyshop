@@ -1,10 +1,10 @@
 import { Card } from 'react-bootstrap';
-import { Product as ProductItem } from '../models/Product';
+import { ProductType } from '../models/Product';
 import { Link } from 'react-router-dom';
 import Rating from './Rating';
 
 type ProductProps = {
-  product: ProductItem;
+  product: ProductType;
 };
 
 const Product = ({ product }: ProductProps) => {
@@ -12,7 +12,7 @@ const Product = ({ product }: ProductProps) => {
     <Card className="p-3 rounded h-100">
       <Link to={`/product/${product._id}`}>
         <Card.Img
-          src={product.image || `https://source.unsplash.com/random/450x450?sig=${product._id}`}
+          src={product.image.includes('unsplash') ? product.image + `/900x900?sig=${product._id}` : product.image}
           variant="top"
         />
       </Link>
