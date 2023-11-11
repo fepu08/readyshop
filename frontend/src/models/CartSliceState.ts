@@ -1,7 +1,7 @@
-import { ProductType } from './Product';
+import { CartItem } from './CartItem';
 
 type CartSliceState = {
-  cartItems: Array<ProductType & { qty: number }>;
+  cartItems: CartItem[];
   itemsPrice: number;
   shippingPrice: number;
   taxPrice: number;
