@@ -31,14 +31,14 @@ const ProductScreen = () => {
       </Link>
       <>
         <Row>
-          <Col md={6}>
+          <Col lg={6}>
             <Image
               src={product.image.includes('unsplash') ? product.image + `/900x900?sig=${product._id}` : product.image}
               alt={product.name}
               fluid
             />
           </Col>
-          <Col md={3}>
+          <Col lg={3}>
             <ListGroup variant="flush" className="h-100">
               <ListGroup.Item>
                 <h3>{product.name}</h3>
@@ -52,7 +52,7 @@ const ProductScreen = () => {
               </ListGroup.Item>
             </ListGroup>
           </Col>
-          <Col md={3}>
+          <Col lg={3}>
             <Card>
               <ListGroup variant="flush">
                 <ListGroup.Item>
