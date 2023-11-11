@@ -2,14 +2,20 @@ import { Col, Row } from 'react-bootstrap';
 import Product from '../components/Product';
 import { useGetProductsQuery } from '../slices/productsApiSclie';
 import getErrorMessageFromRTKQueryError from '../utils';
+import Loader from '../components/Loader';
+import Message from '../components/Message';
 
 export const HomeScreen = () => {
   const { data: products, isLoading, error } = useGetProductsQuery();
 
   if (isLoading) {
-    return <h2>Loading...</h2>;
+    return <Loader />;
   } else if (error) {
-    return <div>{getErrorMessageFromRTKQueryError(error)}</div>;
+    return (
+      <Message variant="danger">
+        <p>{getErrorMessageFromRTKQueryError(error)}</p>
+      </Message>
+    );
   }
 
   return (
