@@ -25,14 +25,14 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
   return (
     <>
       <Row>
-        <Col lg={6}>
+        <Col lg={4} xl={6}>
           <Image
             src={product.image.includes('unsplash') ? product.image + `/900x900?sig=${product._id}` : product.image}
             alt={product.name}
             fluid
           />
         </Col>
-        <Col lg={3}>
+        <Col lg={4} xl={3}>
           <ListGroup variant="flush" className="h-100">
             <ListGroup.Item>
               <h3>{product.name}</h3>
@@ -46,7 +46,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
             </ListGroup.Item>
           </ListGroup>
         </Col>
-        <Col lg={3}>
+        <Col lg={4} xl={3}>
           <Card>
             <ListGroup variant="flush">
               <ListGroup.Item>
@@ -68,7 +68,11 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
                   <Row>
                     <Col>Qty</Col>
                     <Col>
-                      <Form.Select value={qty} onChange={(e) => setQty(Number(e.target.value))}>
+                      <Form.Select
+                        value={qty}
+                        style={{ paddingRight: '0' }}
+                        onChange={(e) => setQty(Number(e.target.value))}
+                      >
                         {[...Array(product.countInStock).keys()].map((x) => (
                           <option key={x + 1} value={x + 1}>
                             {x + 1}
