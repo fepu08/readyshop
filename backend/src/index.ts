@@ -2,8 +2,9 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import connectDB from './config/db';
-import productRoutes from './routes/productRoutes';
 import { errorHandler, notFound } from './middlewares/errorMiddleware';
+import productRouter from './routes/productRoutes';
+import userRouter from './routes/userRoutes';
 
 dotenv.config();
 connectDB();
@@ -21,7 +22,8 @@ app.get('/', (req, res) => {
   res.send('API is running...');
 });
 
-app.use('/api/products', productRoutes);
+app.use('/api/products', productRouter);
+app.use('/api/users', userRouter);
 
 app.use(notFound);
 app.use(errorHandler);
