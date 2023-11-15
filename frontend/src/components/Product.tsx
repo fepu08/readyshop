@@ -2,6 +2,7 @@ import { Card } from 'react-bootstrap';
 import { ProductType } from '../models/Product';
 import { Link } from 'react-router-dom';
 import Rating from './Rating';
+import { getFormattedNumberAsString } from '../utils';
 
 type ProductProps = {
   product: ProductType;
@@ -26,7 +27,7 @@ const Product = ({ product }: ProductProps) => {
         <Card.Text as="div">
           <Rating value={product.rating} text={`${product.numReviews} reviews`} />
         </Card.Text>
-        <Card.Text as="h3">${product.price}</Card.Text>
+        <Card.Text as="h3">${getFormattedNumberAsString(product.price)}</Card.Text>
       </Card.Body>
     </Card>
   );

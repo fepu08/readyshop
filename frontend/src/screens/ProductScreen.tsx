@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useGetProductDetailsQuery } from '../slices/productsApiSclie';
-import getErrorMessageFromRTKQueryError from '../utils';
+import { getErrorMessageFromRTKQueryError } from '../utils';
 import Loader from '../components/Loader';
 import ProductDetails from '../components/ProductDetails';
 import Message from '../components/Message';

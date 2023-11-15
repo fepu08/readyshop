@@ -1,7 +1,7 @@
 import { Col, Row } from 'react-bootstrap';
 import Product from '../components/Product';
 import { useGetProductsQuery } from '../slices/productsApiSclie';
-import getErrorMessageFromRTKQueryError from '../utils';
+import { getErrorMessageFromRTKQueryError } from '../utils';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 
