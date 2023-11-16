@@ -5,4 +5,5 @@ export interface UserDocument extends Document {
   email: string;
   password: string;
   isAdmin: boolean;
+  matchPassword: (inputPw: string) => Promise<boolean>;
 }
