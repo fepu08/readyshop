@@ -25,6 +25,9 @@ export const errorHandler = (err: Error, req: Request, res: Response, next: Next
 
 const logRequestError = (error: Error, req: Request) => {
   const { method, path, params, query, body } = req;
+  if (body.password) {
+    delete body.password;
+  }
   const message = `[${method}] ${path} - params: ${JSON.stringify(params)}, query: ${JSON.stringify(
     query,
   )}, body: ${JSON.stringify(body)}, error: ${JSON.stringify(error.message)}`;
