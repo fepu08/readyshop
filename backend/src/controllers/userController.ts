@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import asyncHandler from '../middlewares/asyncHandler';
 import User from '../schemas/userSchema';
+import jwt from 'jsonwebtoken';
 
 export default class UserController {
   /**
@@ -17,6 +18,21 @@ export default class UserController {
       res.status(401);
       throw new Error('Invalid email or password');
     }
+
+    if (!process.env.JWT_SECRET) {
+      throw new Error('Missing JWT secret');
+    }
+
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+      expiresIn: process.env.NODE_ENV === 'production' ? '1h' : '30d',
+    });
+
+    res.cookie('jwt', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: process.env.NODE_ENV !== 'production' ? 30 * 24 * 60 * 1000 : 60000,
+    });
 
     if (user) {
       res.json({
