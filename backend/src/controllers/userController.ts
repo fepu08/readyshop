@@ -1,9 +1,7 @@
 import { Request, Response } from 'express';
 import asyncHandler from '../middlewares/asyncHandler';
 import User from '../schemas/userSchema';
-import jwt from 'jsonwebtoken';
-import { MissingEnvVarError } from '../errors/MissingEnvVarError';
-
+import { setUpJwtCookie } from '../utils';
 export default class UserController {
   /**
    * @desc 		Auth user & get token
@@ -11,10 +9,6 @@ export default class UserController {
    * @access 	Public
    */
   static authUser = asyncHandler(async (req: Request, res: Response) => {
-    if (!process.env.JWT_SECRET) {
-      throw new MissingEnvVarError('Missing JWT secret');
-    }
-
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
@@ -24,16 +18,7 @@ export default class UserController {
       throw new Error('Invalid email or password');
     }
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: process.env.NODE_ENV === 'production' ? '1h' : '30d',
-    });
-
-    res.cookie('jwt', token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-      maxAge: process.env.NODE_ENV !== 'production' ? 30 * 24 * 60 * 1000 : 60000,
-    });
+    setUpJwtCookie(user._id, res);
 
     if (user) {
       res.json({
@@ -51,7 +36,32 @@ export default class UserController {
    * @access 	Public
    */
   static registerUser = asyncHandler(async (req: Request, res: Response) => {
-    res.send('register user');
+    const { name, email, password } = req.body;
+    const userExists = await User.findOne({ email });
+    if (userExists) {
+      res.status(400);
+      throw new Error('User already exists');
+    }
+
+    const user = await User.create({
+      name,
+      email,
+      password,
+    });
+
+    if (!user) {
+      res.status(400);
+      throw new Error('Invalid user data');
+    }
+
+    setUpJwtCookie(user._id, res);
+
+    res.status(200).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    });
   });
 
   /**
