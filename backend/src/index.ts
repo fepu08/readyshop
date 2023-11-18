@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import connectDB from './config/db';
+import cookieParser from 'cookie-parser';
 import { errorHandler, notFound } from './middlewares/errorMiddleware';
 import productRouter from './routes/productRoutes';
 import userRouter from './routes/userRoutes';
@@ -18,6 +19,7 @@ app.use(
     origin: 'http://localhost:3000',
   }),
 );
+app.use(cookieParser());
 
 app.get('/', (req, res) => {
   console.log();

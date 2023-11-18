@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import asyncHandler from '../middlewares/asyncHandler';
 import User from '../schemas/userSchema';
 import jwt from 'jsonwebtoken';
+import { MissingEnvVarError } from '../errors/MissingEnvVarError';
 
 export default class UserController {
   /**
@@ -10,6 +11,10 @@ export default class UserController {
    * @access 	Public
    */
   static authUser = asyncHandler(async (req: Request, res: Response) => {
+    if (!process.env.JWT_SECRET) {
+      throw new MissingEnvVarError('Missing JWT secret');
+    }
+
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
@@ -17,10 +22,6 @@ export default class UserController {
     if (!user || !(await user.matchPassword(password))) {
       res.status(401);
       throw new Error('Invalid email or password');
-    }
-
-    if (!process.env.JWT_SECRET) {
-      throw new Error('Missing JWT secret');
     }
 
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
