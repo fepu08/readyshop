@@ -60,7 +60,12 @@ export default class UserController {
    * @access 	Private
    */
   static logoutUser = asyncHandler(async (req: Request, res: Response) => {
-    res.send('log out');
+    res.cookie('jwt', '', {
+      httpOnly: true,
+      maxAge: 0,
+    });
+
+    res.status(200).json({ message: 'Logged out successfully' });
   });
 
   /**
