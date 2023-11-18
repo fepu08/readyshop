@@ -2,6 +2,9 @@ import { Request, Response } from 'express';
 import asyncHandler from '../middlewares/asyncHandler';
 import User from '../schemas/userSchema';
 import { setUpJwtCookie } from '../utils';
+import { ExtendedRequest } from '../models/ExtendedRequest';
+import { NotAuthorizedError } from '../errors/NotAuthorizedError';
+import { UserNotFoundError } from '../errors/UserNotFoundError';
 export default class UserController {
   /**
    * @desc 		Auth user & get token
@@ -21,7 +24,7 @@ export default class UserController {
     setUpJwtCookie(user._id, res);
 
     if (user) {
-      res.json({
+      res.status(200).json({
         _id: user._id,
         name: user.name,
         email: user.email,
@@ -83,8 +86,23 @@ export default class UserController {
    * @route 	GET /api/users/profile
    * @access 	Private
    */
-  static getUserProfile = asyncHandler(async (req: Request, res: Response) => {
-    res.send('get user profile');
+  static getUserProfile = asyncHandler(async (req: ExtendedRequest, res: Response) => {
+    if (!req.user) {
+      throw new NotAuthorizedError();
+    }
+
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      res.status(404);
+      throw new UserNotFoundError();
+    }
+
+    res.status(200).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    });
   });
 
   /**
@@ -92,8 +110,32 @@ export default class UserController {
    * @route 	UPDATE /api/users/profile
    * @access 	Private
    */
-  static updateUserProfile = asyncHandler(async (req: Request, res: Response) => {
-    res.send('update user profile');
+  static updateUserProfile = asyncHandler(async (req: ExtendedRequest, res: Response) => {
+    if (!req.user) {
+      throw new NotAuthorizedError();
+    }
+
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      res.status(404);
+      throw new UserNotFoundError();
+    }
+
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+
+    if (req.body.password) {
+      user.password = req.body.password;
+    }
+
+    const updatedUser = await user.save();
+
+    res.status(200).json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+    });
   });
 
   /**
