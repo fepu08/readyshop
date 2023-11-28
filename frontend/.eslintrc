@@ -27,6 +27,7 @@
       {
         "singleQuote": true
       }
-    ]
+    ],
+    "react/prop-types": ["off"]
   }
 }
