@@ -1,16 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+export interface UserInfo {
+  id: string;
+  name: string;
+  email: string;
+  isAdmin: boolean;
+}
+
+export interface AuthSliceState {
+  userInfo: UserInfo | null;
+}
+
 const initialState: AuthSliceState = {
-  // FIXME: give the correct type to userInfo
-  userInfo: localStorage.getItem('userInfo') ? (JSON.parse(localStorage.getItem('userInfo')) as object) : null,
+  userInfo: localStorage.getItem('userInfo') ? (JSON.parse(localStorage.getItem('userInfo')!) as UserInfo) : null,
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: (sate, action) => {
-    state.userInfo = action.payload;
-    localStorage.setItem('userInfo', JSON.stringify(action.payload));
+  reducers: {
+    setCredentials: (state, action) => {
+      state.userInfo = action.payload;
+      localStorage.setItem('userInfo', JSON.stringify(action.payload));
+    },
   },
 });
 
