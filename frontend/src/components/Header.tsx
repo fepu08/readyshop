@@ -1,16 +1,28 @@
 import { Badge, Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { FaShoppingCart } from 'react-icons/fa';
 import { LinkContainer } from 'react-router-bootstrap';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useLogoutMutation } from '../slices/usersApiSlice';
+import { logout } from '../slices/authSlice';
 import { RootState } from '../store';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { getErrorMessageFromRTKQueryError } from '../utils';
 
 const Header = () => {
   const { cartItems } = useSelector((state: RootState) => state.cart);
   const { userInfo } = useSelector((state: RootState) => state.auth);
-  console.log(cartItems);
 
-  const logoutHandler = () => {
-    console.log('logout');
+  const dispatch = useDispatch();
+
+  const [logoutApiCall] = useLogoutMutation();
+
+  const logoutHandler = async () => {
+    try {
+      await logoutApiCall({}).unwrap();
+      dispatch(logout());
+    } catch (err) {
+      console.error(getErrorMessageFromRTKQueryError(err as FetchBaseQueryError));
+    }
   };
 
   return (
